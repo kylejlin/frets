@@ -1,12 +1,17 @@
 import React from 'react'
 import './Frets.css'
-import defaultSettings from './guitarSettings'
+import guitarSettings from './guitarSettings'
+import bassSettings from './bassSettings'
 
 const HALF_STEP = 2 ** (1 / 12)
 
 class Frets extends React.Component {
   constructor(props) {
     super(props)
+
+    const defaultSettings = (window.location + '').indexOf('bass') > -1
+      ? bassSettings
+      : guitarSettings
 
     const { cellWidth, cellHeight } = this.calculateCellHeight(defaultSettings)
 
