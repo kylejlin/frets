@@ -9,7 +9,16 @@ export default {
     246.9, // B3
     329.6 // E4
   ],
-  
+
+  colors: [
+    'red',
+    'orange',
+    'yellow',
+    'lime',
+    'blue',
+    'magenta'
+  ],
+
   markings: [
     {
       x: 5,

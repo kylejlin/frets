@@ -83,7 +83,8 @@ class Frets extends React.Component {
           return <div
             className="Frets-string"
             style={{
-              top: (i + 0.5) * this.state.cellHeight
+              top: (i + 0.5) * this.state.cellHeight,
+              background: this.state.settings.colors[i]
             }}
           />
         })}
