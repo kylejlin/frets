@@ -1,0 +1,8 @@
+.Frets-cell {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: grey;
+
+  border: 1px solid black;
+}
