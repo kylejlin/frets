@@ -21,6 +21,42 @@ class Frets extends React.Component {
       246.9, // B3
       329.6 // E4
     ]
+    this.markings = [
+      {
+        x: 5,
+        y: 3
+      },
+      {
+        x: 7,
+        y: 1.5
+      },
+      {
+        x: 7,
+        y: 4.5
+      },
+      {
+        x: 9,
+        y: 3
+      },
+      {
+        x: 12,
+        y: 1.5
+      },
+      {
+        x: 12,
+        y: 4.5
+      },
+      {
+        x: 15,
+        y: 3
+      },
+      {
+        x: 17,
+        y: 3
+      }
+    ]
+
+    this.strings = [0, 1, 2, 3, 4, 5]
 
     const audioCtx = new AudioContext()
     const gainNode = audioCtx.createGain()
@@ -41,12 +77,29 @@ class Frets extends React.Component {
       <div className="Frets">
         {cells.map(cell => {
           return <div
-            className="Frets-cell"
+            className={'Frets-cell' + (cell.x === 0 ? ' Frets-zeroth-cell' : '')}
             style={{
               left: cell.x * this.state.cellWidth,
               top: cell.y * this.state.cellHeight
             }}
             onClick={() => this.onCellClick(cell)}
+          />
+        })}
+        {this.markings.map(marking => {
+          return <div
+            className="Frets-marking"
+            style={{
+              left: marking.x * this.state.cellWidth,
+              top: marking.y * this.state.cellHeight
+            }}
+          />
+        })}
+        {this.strings.map(string => {
+          return <div
+            className="Frets-string"
+            style={{
+              top: (string + 0.5) * this.state.cellHeight
+            }}
           />
         })}
       </div>
@@ -56,13 +109,18 @@ class Frets extends React.Component {
   calculateCellHeight() {
     const width = window.innerWidth / 21
     const height = window.innerHeight / 6
+
     document.body.style.setProperty('--cell-width', width + 'px')
     document.body.style.setProperty('--cell-height', height + 'px')
+    document.body.style.setProperty('--marking-diameter', width + 'px')
+
     const dimensions = {
       cellWidth: width,
       cellHeight: height
     }
+
     this.setState(dimensions)
+
     return dimensions
   }
 

@@ -6,3 +6,31 @@
 
   border: 1px solid var(--white);
 }
+
+.Frets-cell.Frets-zeroth-cell {
+  background-color: var(--black);
+}
+
+.Frets-marking {
+  position: absolute;
+
+  background-color: var(--translucent-blue);
+
+  width: var(--marking-diameter);
+  height: var(--marking-diameter);
+  border-radius: var(--marking-diameter);
+
+  transform: translate(0, -50%);
+
+
+}
+
+.Frets-string {
+  position: absolute;
+  left: 0;
+
+  width: 100vw;
+  height: 1px;
+
+  background-color: var(--translucent-blue);
+}

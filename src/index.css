@@ -6,6 +6,7 @@ body {
   --grey: #22252A;
   --white: #eee;
   --blue: #08b;
+  --translucent-blue: #08ba;
   --cell-width: 10px;
   --cell-height: 10px;
 }
