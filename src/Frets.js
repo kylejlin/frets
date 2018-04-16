@@ -41,7 +41,7 @@ class Frets extends React.Component {
             className={'Frets-cell' + (cell.x === this.state.settings.frets ? ' Frets-zeroth-cell' : '')}
             style={{
               left: cell.x * this.state.cellWidth,
-              top: cell.y * this.state.cellHeight
+              top: (this.state.settings.strings.length - cell.y - 1) * this.state.cellHeight
             }}
             onClick={() => {
               if ('ontouchstart' in document) {
