@@ -43,10 +43,16 @@ class Frets extends React.Component {
               left: cell.x * this.state.cellWidth,
               top: cell.y * this.state.cellHeight
             }}
-            onClick={/*cell.x === this.state.settings.frets
-              ? () => this.onActivatorClick(cell, this.state.settings)
-              : () => this.onCellClick(cell, this.state.settings)
-            */null}
+            onClick={() => {
+              if ('ontouchstart' in document) {
+                return // Let touch handlers do the work
+              }
+              if (cell.x === this.state.settings.frets) {
+                this.playCell({ x: 0, y: cell.y }, this.state.settings)
+                return
+              }
+              this.playCell({ x: cell.x + 1, y: cell.y }, this.state.settings)
+            }}
             onTouchStart={
               cell.x === this.state.settings.frets
                 ? () => this.startActivator(cell, this.state.settings)
@@ -115,7 +121,7 @@ class Frets extends React.Component {
     return cells
   }
 
-  /*onCellClick(cell, settings) {
+  playCell(cell, settings) {
     const oscillator = this.audioCtx.createOscillator()
     oscillator.connect(this.gainNode)
     oscillator.type = 'sine'
@@ -127,7 +133,7 @@ class Frets extends React.Component {
     setTimeout(() => {
       oscillator.stop()
     }, 5e2)
-  }*/
+  }
 
   pressCell(cell) {
     this.setState(prevState => ({
