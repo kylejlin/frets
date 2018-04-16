@@ -8,8 +8,8 @@ class Frets extends React.Component {
   constructor(props) {
     super(props)
 
-    const { cellWidth, cellHeight } = this.calculateCellHeight()
-    
+    const { cellWidth, cellHeight } = this.calculateCellHeight(defaultSettings)
+
     this.state = {
       cellWidth,
       cellHeight,
@@ -24,7 +24,7 @@ class Frets extends React.Component {
     this.gainNode = gainNode
 
     window.addEventListener('resize', () => {
-      this.calculateCellHeight()
+      this.calculateCellHeight(this.state.settings)
       this.forceUpdate()
     })
   }
@@ -66,9 +66,9 @@ class Frets extends React.Component {
     )
   }
 
-  calculateCellHeight() {
-    const width = window.innerWidth / 21
-    const height = window.innerHeight / 6
+  calculateCellHeight(settings) {
+    const width = window.innerWidth / settings.frets
+    const height = window.innerHeight / settings.strings.length
 
     document.body.style.setProperty('--cell-width', width + 'px')
     document.body.style.setProperty('--cell-height', height + 'px')
