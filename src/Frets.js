@@ -7,12 +7,11 @@ class Frets extends React.Component {
   constructor(props) {
     super(props)
 
+    const { cellWidth, cellHeight } = this.calculateCellHeight()
     this.state = {
-
+      cellWidth,
+      cellHeight
     }
-
-    this.CELL_WIDTH = 10
-    this.CELL_HEIGHT = 10
 
     this.stringFrequencies = [
       82.41, // E2
@@ -29,6 +28,11 @@ class Frets extends React.Component {
 
     this.audioCtx = audioCtx
     this.gainNode = gainNode
+
+    window.addEventListener('resize', () => {
+      this.calculateCellHeight()
+      this.forceUpdate()
+    })
   }
 
   render() {
@@ -39,14 +43,27 @@ class Frets extends React.Component {
           return <div
             className="Frets-cell"
             style={{
-              left: cell.x * this.CELL_WIDTH,
-              top: cell.y * this.CELL_HEIGHT
+              left: cell.x * this.state.cellWidth,
+              top: cell.y * this.state.cellHeight
             }}
             onClick={() => this.onCellClick(cell)}
           />
         })}
       </div>
     )
+  }
+
+  calculateCellHeight() {
+    const width = window.innerWidth / 21
+    const height = window.innerHeight / 6
+    document.body.style.setProperty('--cell-width', width + 'px')
+    document.body.style.setProperty('--cell-height', height + 'px')
+    const dimensions = {
+      cellWidth: width,
+      cellHeight: height
+    }
+    this.setState(dimensions)
+    return dimensions
   }
 
   generateCells() {
@@ -75,7 +92,7 @@ class Frets extends React.Component {
     oscillator.start()
     setTimeout(() => {
       oscillator.stop()
-    }, 1e3)
+    }, 5e2)
   }
 }
 
