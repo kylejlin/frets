@@ -1,6 +1,6 @@
 import React from 'react'
 import './Frets.css'
-import defaultSettings from './defaultSettings'
+import defaultSettings from './guitarSettings'
 
 const HALF_STEP = 2 ** (1 / 12)
 
